@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">cestadeferramenta</string>
+    <string name="title_activity_principal">Principal</string>
+    <string name="title_activity_calculo">Calculo</string>
+    <string name="login">Login</string>
+    <string-array name="tipo">
+        <item>MB</item>
+        <item>GB</item>
+    </string-array>
+</resources>
