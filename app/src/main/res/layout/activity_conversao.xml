@@ -12,6 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="68dp"
+        android:layout_gravity="center"
         android:orientation="horizontal">
 
         <EditText
@@ -20,12 +21,12 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Digite Valor"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/convert"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_height="wrap_content"
             android:entries="@array/tipo" />
 
     </LinearLayout>
@@ -45,7 +46,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textViewBits"
+            android:id="@+id/ResultByte"
             android:layout_width="282dp"
             android:layout_height="match_parent" />
 
@@ -53,7 +54,8 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Bits"
+            android:layout_weight="1"
+            android:text="B"
             android:textSize="15dp" />
     </LinearLayout>
 
@@ -63,7 +65,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textViewKB"
+            android:id="@+id/ResultKB"
             android:layout_width="282dp"
             android:layout_height="match_parent" />
 
@@ -71,6 +73,7 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="KB"
             android:textSize="15dp" />
     </LinearLayout>
@@ -81,7 +84,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textViewMB"
+            android:id="@+id/ResultMB"
             android:layout_width="282dp"
             android:layout_height="match_parent" />
 
@@ -89,6 +92,7 @@
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="MB"
             android:textSize="15dp" />
     </LinearLayout>
@@ -99,7 +103,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textViewGB"
+            android:id="@+id/ResultGB"
             android:layout_width="282dp"
             android:layout_height="match_parent" />
 
@@ -107,6 +111,7 @@
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="GB" />
     </LinearLayout>
 
@@ -116,7 +121,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textViewTB"
+            android:id="@+id/ResultTB"
             android:layout_width="282dp"
             android:layout_height="match_parent" />
 
@@ -124,8 +129,14 @@
             android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="TB" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>
