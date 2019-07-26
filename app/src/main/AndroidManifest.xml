@@ -9,10 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Conversao"></activity>
+        <activity android:name=".Conversao"
+            android:label="Conversão Byte">
+        </activity>
         <activity
             android:name=".Calculo"
-            android:label="@string/title_activity_calculo"
+            android:label= "Cálculo IMC"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Principal"
