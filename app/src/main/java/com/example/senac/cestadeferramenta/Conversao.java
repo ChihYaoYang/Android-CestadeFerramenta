@@ -69,9 +69,9 @@ public class Conversao extends AppCompatActivity {
                 //MB
                 ResultMB.setText(formatter.format(edtNum * 1024));
                 //GB
-                ResultMB.setText(formatter.format(edtNum));
+                ResultGB.setText(formatter.format(edtNum));
                 //TB
-                ResultMB.setText(formatter.format(edtNum / 1024));
+                ResultTB.setText(formatter.format(edtNum / 1024));
             }
         } else {
             ResultByte.setText("0");
