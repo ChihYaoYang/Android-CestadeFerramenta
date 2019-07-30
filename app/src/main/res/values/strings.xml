@@ -7,4 +7,9 @@
         <item>MB</item>
         <item>GB</item>
     </string-array>
+    <string-array name="status">
+        <item>Comprado</item>
+        <item>Não Comprado</item>
+    </string-array>
+    <string name="title_activity_listagem">Listagem</string>
 </resources>

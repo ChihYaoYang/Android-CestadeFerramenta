@@ -24,8 +24,9 @@ public class MainActivity extends AppCompatActivity {
     public void irParaPrincipal(View V) {
         //atribui o valor do campo da tela para a variavel do tipo string
         String email = editEmail.getText().toString();
+        String senha = editPassword.getText().toString();
 
-        if(email.equals("chih.yang@aluno.sc.senac.br")) {
+        if(email.equals("chih.yang@aluno.sc.senac.br") && senha.equals("1234")) {
             //mensagem para exibicao de informações
             Toast.makeText( this,  "logado", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this, Principal.class);

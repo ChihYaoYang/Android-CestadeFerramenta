@@ -4,31 +4,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sobre extends AppCompatActivity {
-    ImageView imagem;
-
+public class Produto extends AppCompatActivity {
+    ImageView imagemns;
+    Spinner status;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sobre);
-        imagem = findViewById(R.id.imagem);
-    }
+        setContentView(R.layout.activity_produto);
 
+        imagemns = findViewById(R.id.imagemns);
+        status = findViewById(R.id.status);
+    }
     public void tirafoto(View V) {
         if (checkAndRequestPermissions()) {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -43,7 +41,7 @@ public class Sobre extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            imagem.setImageBitmap(imageBitmap);
+            imagemns.setImageBitmap(imageBitmap);
         }
     }
 
@@ -61,5 +59,4 @@ public class Sobre extends AppCompatActivity {
         }
         return true;
     }
-
 }

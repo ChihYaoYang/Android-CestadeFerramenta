@@ -17,6 +17,7 @@
 
     <EditText
         android:id="@+id/editEmail"
+        android:text="chih.yang@aluno.sc.senac.br"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -25,6 +26,7 @@
 
     <EditText
         android:id="@+id/editPassword"
+        android:text="1234"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"

@@ -35,4 +35,13 @@
         android:textColor="#ffffff"
         android:onClick="irParaSobre"
         android:text="Sobre" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#CDDC39"
+        android:textColor="#ffffff"
+        android:onClick="irParalistagem"
+        android:text="Listagem" />
 </LinearLayout>

@@ -28,4 +28,8 @@ public class Principal extends AppCompatActivity {
         Intent i = new Intent(this, Sobre.class);
         startActivity(i);
     }
+    public void irParalistagem(View V) {
+        Intent i = new Intent(this, Listagem.class);
+        startActivity(i);
+    }
 }
