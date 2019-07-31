@@ -1,7 +1,8 @@
-package com.example.senac.cestadeferramenta;
+package com.example.senac.cestadeferramenta.ui;
 
 import android.os.Bundle;
 
+import com.example.senac.cestadeferramenta.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -22,8 +23,6 @@ public class Calculo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculo);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
     }
 
     public void calculo(View V) {

@@ -1,4 +1,4 @@
-package com.example.senac.cestadeferramenta;
+package com.example.senac.cestadeferramenta.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.example.senac.cestadeferramenta.R;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;

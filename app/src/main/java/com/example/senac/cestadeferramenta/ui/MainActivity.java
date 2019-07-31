@@ -1,4 +1,4 @@
-package com.example.senac.cestadeferramenta;
+package com.example.senac.cestadeferramenta.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.senac.cestadeferramenta.R;
+import com.example.senac.cestadeferramenta.model.Usuario;
 
 public class MainActivity extends AppCompatActivity {
     EditText editPassword,editEmail;
@@ -22,9 +25,20 @@ public class MainActivity extends AppCompatActivity {
         editPassword = findViewById(R.id.editPassword);
     }
     public void irParaPrincipal(View V) {
-        //atribui o valor do campo da tela para a variavel do tipo string
+
+        Usuario usuario = new Usuario();
+        usuario.setCodigo(1);
+        usuario.setEmail("chih.yang@aluno.sc.senac.br");
+        usuario.setSenha("senha");
         String email = editEmail.getText().toString();
         String senha = editPassword.getText().toString();
+
+        if (email.equals(usuario.getEmail()) && senha.equals(usuario.getSenha())) {
+
+        }
+
+        //atribui o valor do campo da tela para a variavel do tipo string
+
 
         if(email.equals("chih.yang@aluno.sc.senac.br") && senha.equals("1234")) {
             //mensagem para exibicao de informações

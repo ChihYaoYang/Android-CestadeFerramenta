@@ -1,4 +1,4 @@
-package com.example.senac.cestadeferramenta;
+package com.example.senac.cestadeferramenta.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -15,6 +15,8 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.example.senac.cestadeferramenta.R;
 
 import java.util.ArrayList;
 import java.util.List;

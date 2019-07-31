@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".Principal">
+    tools:context=".ui.Principal">
 
 
     <Button
@@ -26,15 +26,6 @@
         android:onClick="irParaConversao"
         android:text="Conversao"
         android:textColor="#ffffff" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#009688"
-        android:textColor="#ffffff"
-        android:onClick="irParaSobre"
-        android:text="Sobre" />
 
     <Button
         android:id="@+id/button7"
