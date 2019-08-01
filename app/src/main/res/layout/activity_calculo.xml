@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.Calculo">
 
-  
+
 
     <include layout="@layout/content_calculo" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

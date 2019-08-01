@@ -10,10 +10,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.senac.cestadeferramenta.R;
+import com.example.senac.cestadeferramenta.helper.DatabaseHelper;
 import com.example.senac.cestadeferramenta.model.Usuario;
 
 public class MainActivity extends AppCompatActivity {
-    EditText editPassword,editEmail;
+    EditText editPassword, editEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,32 +22,26 @@ public class MainActivity extends AppCompatActivity {
         Log.i("ciclo", "Passando pelo método Oncreate . . .");
         setContentView(R.layout.activity_main);
 
-        editEmail =findViewById(R.id.editEmail);
+        editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
     }
-    public void irParaPrincipal(View V) {
 
-        Usuario usuario = new Usuario();
-        usuario.setCodigo(1);
-        usuario.setEmail("chih.yang@aluno.sc.senac.br");
-        usuario.setSenha("senha");
+    public void irParaPrincipal(View V) {
+        //Chama Databasehelper
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+
         String email = editEmail.getText().toString();
         String senha = editPassword.getText().toString();
 
-        if (email.equals(usuario.getEmail()) && senha.equals(usuario.getSenha())) {
-
-        }
-
-        //atribui o valor do campo da tela para a variavel do tipo string
-
-
-        if(email.equals("chih.yang@aluno.sc.senac.br") && senha.equals("1234")) {
-            //mensagem para exibicao de informações
-            Toast.makeText( this,  "logado", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(this, Principal.class);
-            startActivity(i);
+        //Atribui o valor email e senha
+        Usuario usuario = databaseHelper.validarUsuario(email, senha);
+        //validation
+        if (usuario != null) {
+            Toast.makeText(this,"Bem Vindos " + email , Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, Principal.class));
+            finish();
         } else {
-            Toast.makeText( this,  "Falha ao logar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Usuário e senha inválidos", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -58,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i("ciclo" , "onresume");
+        Log.i("ciclo", "onresume");
     }
 
     @Override
@@ -71,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i("ciclo" , "onstop");
+        Log.i("ciclo", "onstop");
     }
 
     public void onRestart() {
@@ -82,6 +77,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.i("ciclo" , "destroty");
+        Log.i("ciclo", "destroty");
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".ui.Produto">
+    tools:context=".ui.ProdutoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -104,10 +104,11 @@
             android:text="Salva" />
 
         <Button
-            android:id="@+id/deletar"
+            android:id="@+id/btnExcluir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="excluirCadastro"
             android:backgroundTint="#E91E63"
             android:textColor="#ffffff"
             android:text="DELETE" />

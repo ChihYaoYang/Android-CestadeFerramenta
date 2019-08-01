@@ -26,7 +26,6 @@
 
     <EditText
         android:id="@+id/editPassword"
-        android:text="1234"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
