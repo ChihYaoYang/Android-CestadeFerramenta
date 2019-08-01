@@ -8,4 +8,8 @@
     tools:context=".ui.Listagem"
     tools:showIn="@layout/activity_listagem">
 
+    <ListView
+        android:id="@+id/lista"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
