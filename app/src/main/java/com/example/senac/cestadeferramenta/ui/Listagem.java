@@ -13,7 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +30,13 @@ public class Listagem extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listagem);
 
-        final Intent i = new Intent(this, ProdutoActivity.class);
+        final Intent intent = new Intent(this, ProdutoActivity.class);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(i);
+                startActivity(intent);
             }
         });
 
@@ -43,6 +45,15 @@ public class Listagem extends AppCompatActivity {
         AdapterList adapterList = new AdapterList(produtos, this);
         listaProdutos = findViewById(R.id.lista);
         listaProdutos.setAdapter(adapterList);
+
+
+        listaProdutos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                intent.putExtra("produto", produtos.get(i));
+                startActivity(intent);
+                Toast.makeText(Listagem.this, "Nome: " + produtos.get(i), Toast.LENGTH_SHORT);
+            }
+        });
 
 
         databaseHelper = new DatabaseHelper(this);

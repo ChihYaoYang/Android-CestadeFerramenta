@@ -48,7 +48,7 @@ public class AdapterList extends BaseAdapter {
         ImageView imagem = view.findViewById(R.id.imagemProduto);
         TextView txNome = view.findViewById(R.id.nomeProduto);
         TextView quantidade = view.findViewById(R.id.qtdProduto);
-        TextView stattus = view.findViewById(R.id.statusProduto);
+        ImageView imgStatus = view.findViewById(R.id.imgStatus);
         //Converte IMG
         byte[] decodedString = Base64.decode(produto.getFoto(), Base64.DEFAULT);
         Bitmap decodeByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
@@ -56,7 +56,14 @@ public class AdapterList extends BaseAdapter {
         imagem.setImageBitmap(decodeByte);
         txNome.setText(produto.getNome());
         quantidade.setText("QTD: " + produto.getQuantidade());
-        stattus.setText(produto.getStatus());
+
+        //Validation se for C(Comprado) exibir (set img no drawable) no lista (layout)
+        if (produto.getStatus().equals("C")) {
+            imgStatus.setImageResource(R.drawable.checked);
+        } else {
+            imgStatus.setImageResource(R.drawable.alert);
+        }
+
         return view;
     }
 

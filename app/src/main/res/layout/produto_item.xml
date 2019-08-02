@@ -36,13 +36,12 @@
                 android:background="#FFE4B5"
                 android:text="QTD: " />
 
-            <TextView
-                android:id="@+id/statusProduto"
+            <ImageView
+                android:id="@+id/imgStatus"
                 android:layout_width="wrap_content"
-                android:background="#E6E6FA"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Status: " />
+                app:srcCompat="@drawable/checked" />
+
         </LinearLayout>
 
     </LinearLayout>

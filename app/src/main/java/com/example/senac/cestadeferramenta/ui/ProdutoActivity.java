@@ -45,8 +45,17 @@ public class ProdutoActivity extends AppCompatActivity {
         quantidade = findViewById(R.id.quantidade);
         nomeprod = findViewById(R.id.nomeprod);
         btnExcluir = findViewById(R.id.btnExcluir);
-        //Oculta informações na tela
-        btnExcluir.setVisibility(View.GONE);
+
+        Intent i = getIntent();
+        Produto pro = (Produto) i.getSerializableExtra("produto");
+
+        if (pro != null) {
+            //Oculta informações na tela
+            btnExcluir.setVisibility(View.VISIBLE);
+            Toast.makeText(this,"Editanto " + pro.getNome(),Toast.LENGTH_SHORT).show();
+        } else {
+            btnExcluir.setVisibility(View.GONE);
+        }
         //Visible
         //btnExcluir.setVisibility(View.VISIBLE);
 
