@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -29,11 +30,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoActivity extends AppCompatActivity {
-
     EditText nomeprod, quantidade;
     Spinner status;
     ImageView imagemns;
     Button btnExcluir;
+    Produto pro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +48,22 @@ public class ProdutoActivity extends AppCompatActivity {
         btnExcluir = findViewById(R.id.btnExcluir);
 
         Intent i = getIntent();
-        Produto pro = (Produto) i.getSerializableExtra("produto");
+        pro = (Produto) i.getSerializableExtra("produto");
 
         if (pro != null) {
             //Oculta informações na tela
             btnExcluir.setVisibility(View.VISIBLE);
-            Toast.makeText(this,"Editanto " + pro.getNome(),Toast.LENGTH_SHORT).show();
+            nomeprod.setText(pro.getNome());
+            quantidade.setText(Integer.toString(pro.getQuantidade()));
+            status.setSelection(pro.getStatus().equals("C") ? 1 : 0);
+
+            //Converte IMG
+            byte[] decodedString = Base64.decode(pro.getFoto(), Base64.DEFAULT);
+            Bitmap decodeByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            //Exibir
+            imagemns.setImageBitmap(decodeByte);
+
+            Toast.makeText(this, "Editanto " + pro.getNome(), Toast.LENGTH_SHORT).show();
         } else {
             btnExcluir.setVisibility(View.GONE);
         }
@@ -81,19 +92,42 @@ public class ProdutoActivity extends AppCompatActivity {
     public void salvarcadastro(View v) {
         //verifica os campos
         String mensagem = validation();
-        //caso seja true salvar os campos
+
+        //update
         if (mensagem.length() == 0) {
-            //call function salvar
-            salvar();
+            if (pro != null) {
+                updatecadastro(v);
+            } else {
+                //call function salvar
+                salvar();
+            }
         } else {
             //call function para exibir as mensagem
             mensagemErro(mensagem);
         }
     }
 
+    //update
+    public void updatecadastro(View v) {
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        String nome = nomeprod.getText().toString();
+        int quant = Integer.parseInt(quantidade.getText().toString());
+        //Get values
+
+        pro.setFoto(getImagem());
+        pro.setNome(nome);
+        pro.setQuantidade(quant);
+        //Valida status
+        pro.setStatus(status.getSelectedItem().toString().equals("Comprado") ? "C" : "N");
+
+        databaseHelper.update(pro);
+        finish();
+    }
+
     public void excluirCadastro(View v) {
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
-        //databaseHelper.removerProduto();
+        databaseHelper.removerProduto(pro);
+        finish();
     }
 
     //function salve

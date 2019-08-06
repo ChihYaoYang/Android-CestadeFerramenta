@@ -106,6 +106,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
     }
 
+    public void update(Produto produto) {
+        try {
+            getProdutoDao().update(produto);
+        } catch (Exception e) {
+            Log.e("banco", "Falha no update produto");
+        }
+    }
+
     public List<Produto> buscarTodos() {
         List<Produto> produtos = null;
         try {

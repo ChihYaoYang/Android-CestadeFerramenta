@@ -36,6 +36,7 @@ public class Listagem extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                intent.removeExtra("produto");
                 startActivity(intent);
             }
         });

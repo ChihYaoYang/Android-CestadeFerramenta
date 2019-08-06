@@ -35,4 +35,13 @@
         android:textColor="#ffffff"
         android:onClick="irParalistagem"
         android:text="Listagem" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#829DCA"
+        android:onClick="telephone"
+        android:text="Listagem de TelePhone"
+        android:textColor="#ffffff" />
 </LinearLayout>

@@ -47,4 +47,9 @@ public class Principal extends AppCompatActivity {
         Intent i = new Intent(this, Listagem.class);
         startActivity(i);
     }
+
+    public void telephone(View v) {
+        Intent i = new Intent(this, ListagemPhoneActivity.class);
+        startActivity(i);
+    }
 }
