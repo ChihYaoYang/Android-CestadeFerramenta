@@ -113,6 +113,7 @@
             android:layout_weight="1"
             android:backgroundTint="#9A62E765"
             android:text="Salvar"
+            android:onClick="salvecadastro"
             android:textColor="#ffffff" />
 
         <Button

@@ -17,6 +17,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:backgroundTint="#82B1FF"
         android:tint="#ffffff"
-        app:srcCompat="@android:drawable/ic_input_add"/>
+        app:backgroundTint="#82B1FF"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

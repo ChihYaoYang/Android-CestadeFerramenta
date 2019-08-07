@@ -20,6 +20,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.senac.cestadeferramenta.R;
+import com.example.senac.cestadeferramenta.helper.DatabaseHelper;
+import com.example.senac.cestadeferramenta.model.Phone;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -37,6 +39,7 @@ public class CadastroPhoneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_phone);
 
+
         //find id
         imagephone = findViewById(R.id.imagePhone);
         modelophone = findViewById(R.id.modelophone);
@@ -53,7 +56,7 @@ public class CadastroPhoneActivity extends AppCompatActivity {
         if (precophone.getText().toString().trim().length() == 0) {
             return "Preencher o campo Preço";
         } else {
-            int preco = Integer.parseInt(precophone.getText().toString());
+            float preco = Float.parseFloat(precophone.getText().toString());
             if (preco == 0) {
                 return "Preencher o campo Preço";
             }
@@ -62,14 +65,7 @@ public class CadastroPhoneActivity extends AppCompatActivity {
     }
     //Validação de campo-->
 
-    //<!-- Salvar Cadastro
-    public void salvecadastro(View v){
-
-    }
-    //Salvar Cadastro-->
-
-
-    //<!-- Erro de mensagem
+    //<!-- Erro de mensagem      Atribui String menssage  e exibir dialog
     public void mensagemErro(String mensagem) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Atenção");
@@ -77,19 +73,62 @@ public class CadastroPhoneActivity extends AppCompatActivity {
         //define um botão como positivo(OK or Cancel)
         builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
-                Toast.makeText(CadastroPhoneActivity.this, "positivo=" + arg1, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CadastroPhoneActivity.this, "positivo=" + arg1, Toast.LENGTH_SHORT).show();
             }
         });
         //define um botão como negativo
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
-                Toast.makeText(CadastroPhoneActivity.this, "negativo=" + arg1, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CadastroPhoneActivity.this, "negativo=" + arg1, Toast.LENGTH_SHORT).show();
             }
         });
         //cria o Alert Dialog
         builder.create().show();
     }
     // Erro de mensagem-->
+
+    //<!-- Salvar Cadastro
+    public void salvecadastro(View v) {
+        //Declara variavel mensagem para pega valor validation
+        String mensagem = validation();
+        if (mensagem.length() == 0) {
+            salvar();
+        } else {
+            //Passa variavel mensagem para mensagemErro
+            mensagemErro(mensagem);
+        }
+    }
+    //Salvar Cadastro-->
+
+    //<!-- salvar
+    public void salvar() {
+        //Declara variavel e passa o valor para metodo create no DatabaseHelper
+        String modelo = modelophone.getText().toString();
+        float preco = Float.parseFloat(precophone.getText().toString());
+        //Setar valor
+        Phone ph = new Phone();
+        ph.setModelo(getImagem());
+        ph.setModelo(modelo);
+        ph.setPreco(preco);
+        ph.setMarca(marca.getSelectedItem().toString().equals("Asus") ? "A" : "X");
+        ph.setColor(color.getSelectedItem().toString().equals("Preto") ? "P" : "B");
+        //Depois setar valor passa valor para DatabaseHelper
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        databaseHelper.salvarPhone(ph);
+        finish();
+    }
+
+
+    //<!-- getImagem
+    public String getImagem() {
+        Bitmap bitmap = ((BitmapDrawable) imagephone.getDrawable()).getBitmap();
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+    //getImagem-->
+    //salvar-->
 
     //<!--Permissão de tirafoto
     public void tirapicture(View V) {

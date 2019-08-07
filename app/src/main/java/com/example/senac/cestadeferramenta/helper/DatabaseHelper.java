@@ -5,6 +5,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.senac.cestadeferramenta.model.Phone;
 import com.example.senac.cestadeferramenta.model.Produto;
 import com.example.senac.cestadeferramenta.model.Usuario;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
@@ -23,6 +24,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private Dao<Usuario, Integer> usuarioDao = null;
     private Dao<Produto, Integer> produtoDao = null;
+    private Dao<Phone, Integer> phoneDao = null;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -33,6 +35,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             TableUtils.createTable(connectionSource, Usuario.class);
             TableUtils.createTable(connectionSource, Produto.class);
+            TableUtils.createTable(connectionSource, Phone.class);
 
             //Usuario
             Usuario usuario = new Usuario();
@@ -50,6 +53,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             TableUtils.dropTable(connectionSource, Usuario.class, true);
             TableUtils.dropTable(connectionSource, Produto.class, true);
+            TableUtils.dropTable(connectionSource, Phone.class, true);
             onCreate(sqLiteDatabase, connectionSource);
         } catch (Exception e) {
             Log.e("banco", "Erro ao criar banco");
@@ -122,5 +126,37 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             Log.e("banco", "Falha ao busca produtos");
         }
         return new ArrayList<>();
+    }
+
+    //PhoneActivity  CRUD
+    public Dao<Phone, Integer> getPhoneDao() throws SQLException {
+        if (produtoDao == null) {
+            try {
+                phoneDao = getDao(Phone.class);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return phoneDao;
+    }
+
+    //Read
+    public List<Phone> getAll() {
+        List<Phone> phones = null;
+        try {
+            return getPhoneDao().queryBuilder().query();
+        } catch (Exception e) {
+            Log.e("banco", "Falha ao busca produtos");
+        }
+        return new ArrayList<>();
+    }
+
+    //Create
+    public void salvarPhone(Phone ph) {
+        try {
+            getPhoneDao().create(ph);
+        } catch (Exception e) {
+            Log.e("Banco", "Falha ao cadastrar phone");
+        }
     }
 }
