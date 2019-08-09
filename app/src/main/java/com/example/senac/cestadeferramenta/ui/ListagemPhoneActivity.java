@@ -36,6 +36,7 @@ public class ListagemPhoneActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                intent.removeExtra("phone");
                 startActivity(intent);
             }
         });
@@ -51,7 +52,7 @@ public class ListagemPhoneActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 intent.putExtra("phone", phones.get(i));
                 startActivity(intent);
-                Toast.makeText(ListagemPhoneActivity.this, "marca: " + phones.get(i), Toast.LENGTH_SHORT);
+                Toast.makeText(ListagemPhoneActivity.this, "Nome: " + phones.get(i), Toast.LENGTH_SHORT);
             }
         });
         databaseHelper = new DatabaseHelper(this);
@@ -62,5 +63,7 @@ public class ListagemPhoneActivity extends AppCompatActivity {
         super.onResume();
         phones = null;
         phones = databaseHelper.getAll();
+        AdapterListaItem adapterListaItem = (AdapterListaItem) listaPhone.getAdapter();
+        adapterListaItem.atualizar(phones);
     }
 }

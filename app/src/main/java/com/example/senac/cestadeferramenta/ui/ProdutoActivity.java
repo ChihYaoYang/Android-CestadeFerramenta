@@ -14,6 +14,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,6 +48,7 @@ public class ProdutoActivity extends AppCompatActivity {
         nomeprod = findViewById(R.id.nomeprod);
         btnExcluir = findViewById(R.id.btnExcluir);
 
+        //Get id update
         Intent i = getIntent();
         pro = (Produto) i.getSerializableExtra("produto");
 

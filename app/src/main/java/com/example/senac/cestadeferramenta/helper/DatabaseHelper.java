@@ -140,6 +140,15 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return phoneDao;
     }
 
+    //Create
+    public void salvarPhone(Phone phone) {
+        try {
+            getPhoneDao().create(phone);
+        } catch (Exception e) {
+            Log.e("Banco", "Falha ao cadastrar phone");
+        }
+    }
+
     //Read
     public List<Phone> getAll() {
         List<Phone> phones = null;
@@ -151,12 +160,21 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return new ArrayList<>();
     }
 
-    //Create
-    public void salvarPhone(Phone ph) {
+    //delete
+    public void excluir(Phone phone) {
         try {
-            getPhoneDao().create(ph);
+            getPhoneDao().delete(phone);
         } catch (Exception e) {
-            Log.e("Banco", "Falha ao cadastrar phone");
+            Log.e("banco", "Falha ao remover produto");
+        }
+    }
+
+    //update
+    public void alterar(Phone phone) {
+        try {
+            getPhoneDao().update(phone);
+        } catch (Exception e) {
+            Log.e("banco", "Falha ao alterar produto");
         }
     }
 }
