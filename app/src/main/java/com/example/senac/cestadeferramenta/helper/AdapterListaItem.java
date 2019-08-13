@@ -64,10 +64,10 @@ public class AdapterListaItem extends BaseAdapter {
 //        color.setText(phone.getColor());
         //validation do spinner
         if (phone.getColor().equals("Preto")) {
-            color.setBackgroundColor(Color.BLACK);
+            color.setBackgroundColor(Color.rgb(0, 0, 0));
 
         } else {
-            color.setBackgroundColor(Color.WHITE);
+            color.setBackgroundColor(Color.rgb(255, 255, 255));
         }
         return view;
     }
