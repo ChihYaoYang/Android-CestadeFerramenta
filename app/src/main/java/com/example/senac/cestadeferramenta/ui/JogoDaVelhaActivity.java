@@ -9,6 +9,7 @@ import android.widget.ImageView;
 public class JogoDaVelhaActivity extends AppCompatActivity {
     ImageView imageGrid01, imageGrid02, imageGrid03, imageGrid04, imageGrid05, imageGrid06, imageGrid07, imageGrid08, imageGrid09;
     Boolean O = true;
+    int[][] status = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class JogoDaVelhaActivity extends AppCompatActivity {
 
     public void click(View v) {
         ImageView imagem = findViewById(v.getId());
-//        int[][] winstatus = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {0, 4, 8}, {1, 4, 7}, {2, 4, 6}, {2, 5, 8}};
+
         if (O == true) {
             imagem.setImageResource(R.drawable.checked);
             O = !O;
