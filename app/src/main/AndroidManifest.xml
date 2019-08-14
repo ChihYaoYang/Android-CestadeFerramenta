@@ -18,13 +18,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".JogoDaVelhaActivity"></activity>
         <activity
             android:name=".ui.CadastroPhoneActivity"
-            android:label="Cadastro de Phone">
-        </activity>
+            android:label="Cadastro de Phone"></activity>
         <activity
             android:name=".ui.ListagemPhoneActivity"
-            android:label="Listagem TelePhone"></activity>
+            android:label="Listagem TelePhone" />
         <activity
             android:name=".ui.ProdutoActivity"
             android:label="Produto" />

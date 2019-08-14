@@ -8,6 +8,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.senac.cestadeferramenta.JogoDaVelhaActivity;
 import com.example.senac.cestadeferramenta.R;
 
 public class Principal extends AppCompatActivity {
@@ -18,19 +19,21 @@ public class Principal extends AppCompatActivity {
 
         setContentView(R.layout.activity_principal);
     }
+
     //Menu
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_aplicativo, menu);
         return true;
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.sobre:
                 //abrir tela de sobre
                 Intent i = new Intent(this, Sobre.class);
                 startActivity(i);
-                default:
-                    return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -43,6 +46,7 @@ public class Principal extends AppCompatActivity {
         Intent i = new Intent(this, Conversao.class);
         startActivity(i);
     }
+
     public void irParalistagem(View V) {
         Intent i = new Intent(this, Listagem.class);
         startActivity(i);
@@ -50,6 +54,11 @@ public class Principal extends AppCompatActivity {
 
     public void telephone(View v) {
         Intent i = new Intent(this, ListagemPhoneActivity.class);
+        startActivity(i);
+    }
+
+    public void irParaJogoDaVelha(View v) {
+        Intent i = new Intent(this, JogoDaVelhaActivity.class);
         startActivity(i);
     }
 }

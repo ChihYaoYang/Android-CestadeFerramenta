@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="100dp"
+    tools:context=".JogoDaVelhaActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageGrid01"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="click"
+                app:srcCompat="@android:drawable/editbox_dropdown_light_frame" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageGrid02"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="click"
+                app:srcCompat="@android:drawable/editbox_dropdown_light_frame" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageGrid03"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="click"
+                app:srcCompat="@android:drawable/editbox_dropdown_light_frame" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageGrid04"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="click"
+                app:srcCompat="@android:drawable/editbox_dropdown_light_frame" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageGrid05"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="click"
+                app:srcCompat="@android:drawable/editbox_dropdown_light_frame" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageGrid06"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="click"
+                app:srcCompat="@android:drawable/editbox_dropdown_light_frame" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageGrid07"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="click"
+                app:srcCompat="@android:drawable/editbox_dropdown_light_frame" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageGrid08"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="click"
+                app:srcCompat="@android:drawable/editbox_dropdown_light_frame" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageGrid09"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="click"
+                app:srcCompat="@android:drawable/editbox_dropdown_light_frame" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
