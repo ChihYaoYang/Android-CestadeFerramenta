@@ -159,4 +159,13 @@
         </LinearLayout>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FF9800"
+        android:onClick="resert"
+        android:text="Restart Game"
+        android:textColor="#ffffff" />
+
 </LinearLayout>

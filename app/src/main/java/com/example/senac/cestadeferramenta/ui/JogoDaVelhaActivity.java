@@ -3,9 +3,11 @@ package com.example.senac.cestadeferramenta;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -118,6 +120,8 @@ public class JogoDaVelhaActivity extends AppCompatActivity {
         tabuleiro[getPosition(image.getId())] = marcacaoX ? "O" : "X";
         marcacaoX = !marcacaoX;
         String vencedor = JogodaVelha.obtemVencedor(tabuleiro);
+        //desabilita click
+        image.setClickable(false);
         if (vencedor != null) {
             Dialog dialog = new Dialog(this);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -128,18 +132,58 @@ public class JogoDaVelhaActivity extends AppCompatActivity {
             TextView contatoro = dialog.findViewById(R.id.contatoro);
             TextView contatorx = dialog.findViewById(R.id.contatorx);
 
+            /*  Dialog button
+            *   Button restart = dialog.findViewById(R.id.restart);
+            restart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    resertgame();
+                }
+            });
+            *
+            * */
             descricao.setText("Parabéns o " + vencedor);
 
             if (vencedor == "O") {
-                contatoro.setText("O: " + o + 1);
+                o++;
             }
             if (vencedor == "X") {
-                contatorx.setText("X: " + x + 1);
+                x++;
             }
+            resertgame();
+            contatoro.setText("O: " + o);
+            contatorx.setText("X: " + x);
             dialog.show();
-
         }
-        image.setClickable(false);
+    }
+
+    public void resertgame() {
+        marcacaoX = true;
+        tabuleiro = new String[9];
+
+        imageGrid01.setImageResource(R.drawable.border);
+        imageGrid02.setImageResource(R.drawable.border);
+        imageGrid03.setImageResource(R.drawable.border);
+        imageGrid04.setImageResource(R.drawable.border);
+        imageGrid05.setImageResource(R.drawable.border);
+        imageGrid06.setImageResource(R.drawable.border);
+        imageGrid07.setImageResource(R.drawable.border);
+        imageGrid08.setImageResource(R.drawable.border);
+        imageGrid09.setImageResource(R.drawable.border);
+
+        imageGrid01.setClickable(true);
+        imageGrid02.setClickable(true);
+        imageGrid03.setClickable(true);
+        imageGrid04.setClickable(true);
+        imageGrid05.setClickable(true);
+        imageGrid06.setClickable(true);
+        imageGrid07.setClickable(true);
+        imageGrid08.setClickable(true);
+        imageGrid09.setClickable(true);
+    }
+
+    public void resert(View v) {
+        resertgame();
     }
 
     private int getPosition(int id) {
