@@ -39,7 +39,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
             //Usuario
             Usuario usuario = new Usuario();
-            usuario.setEmail("chih.yang@aluno.sc.senac.br");
+            usuario.setLogin("chih.yang@aluno.sc.senac.br");
             usuario.setSenha("123456");
             getUsuarioDao().create(usuario);
 

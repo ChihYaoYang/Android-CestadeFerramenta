@@ -12,10 +12,13 @@ public class Usuario implements Serializable {
     private Integer codigo;
 
     @DatabaseField(canBeNull = false)
-    private String email;
+    private String login;
 
     @DatabaseField(canBeNull = false)
     private String senha;
+
+    @DatabaseField(canBeNull = false)
+    private String nome;
 
     public Integer getCodigo() {
         return codigo;
@@ -25,12 +28,12 @@ public class Usuario implements Serializable {
         this.codigo = codigo;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLogin() {
+        return login;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getSenha() {
@@ -39,5 +42,13 @@ public class Usuario implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }

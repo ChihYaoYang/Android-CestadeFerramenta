@@ -30,4 +30,5 @@ dependencies {
     implementation files('libs\\ormlite-android-5.1.jar')
     implementation files('libs\\ormlite-core-5.1.jar')
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
