@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.senac.cestadeferramenta.R;
+import com.example.senac.cestadeferramenta.constantes.Request;
 import com.example.senac.cestadeferramenta.helper.DatabaseHelper;
 import com.example.senac.cestadeferramenta.model.Usuario;
 import com.google.gson.Gson;
@@ -40,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
         editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
 
-        progress = new ProgressDialog(MainActivity.this);
-        progress.setCancelable(false);
-        progress.setMessage("loading");
     }
 
     public void irParaPrincipal(View V) {
@@ -73,15 +72,19 @@ public class MainActivity extends AppCompatActivity {
     private class Login extends AsyncTask<Usuario, Void, Usuario> {
         @Override
         protected void onPreExecute() {
+            progress = new ProgressDialog(MainActivity.this);
             progress.show();
+            progress.setCancelable(false);
+            progress.setContentView(R.layout.progres);
         }
 
         @Override //deve retornar um usuario para o metodo onPostExecute
         // recebe um objeto de usuario por parametro
         protected Usuario doInBackground(Usuario... usuarios) {
             try {
-//                URL url = new URL("http://10.10.196.121:8083/ferramentas/autenticacao");
-                URL url = new URL("http://10.10.196.114:8080/ferramentas/autenticacao");
+                //delay pagina
+                Thread.sleep(2000);
+                URL url = new URL(Request.URL_REQUEST + "/ferramentas/autenticacao");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setRequestProperty("Content-Type", "application/json");
@@ -125,16 +128,25 @@ public class MainActivity extends AppCompatActivity {
         @Override //usuario vem do parametro do metodo doInBackground
         protected void onPostExecute(Usuario usuario) {
             progress.dismiss();
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+
             if (usuario != null) {
+                DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
+                databaseHelper.salvarUsuario(usuario);
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
                 alertDialog.setTitle("Bem Vindo");
                 alertDialog.setMessage(usuario.getNome());
+                alertDialog.create().show();
 
+                startActivity(new Intent(MainActivity.this, Principal.class));
+                finish();
             } else {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
                 alertDialog.setTitle("Atenção");
                 alertDialog.setMessage("Falha ao logar");
+                alertDialog.create().show();
             }
-            alertDialog.create().show();
+
         }
     }
 

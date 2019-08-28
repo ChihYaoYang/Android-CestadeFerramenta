@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -19,14 +21,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.senac.cestadeferramenta.R;
+import com.example.senac.cestadeferramenta.constantes.Request;
 import com.example.senac.cestadeferramenta.helper.DatabaseHelper;
 import com.example.senac.cestadeferramenta.model.Produto;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +48,7 @@ public class ProdutoActivity extends AppCompatActivity {
     ImageView imagemns;
     Button btnExcluir;
     Produto pro;
+    ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,9 +105,8 @@ public class ProdutoActivity extends AppCompatActivity {
 
     //Verifica
     public void salvarcadastro(View v) {
-        //verifica os campos
+//        verifica os campos
         String mensagem = validation();
-
         //update
         if (mensagem.length() == 0) {
             if (pro != null) {
@@ -111,25 +123,25 @@ public class ProdutoActivity extends AppCompatActivity {
 
     //update
     public void updatecadastro(View v) {
-        DatabaseHelper databaseHelper = new DatabaseHelper(this);
-        String nome = nomeprod.getText().toString();
-        int quant = Integer.parseInt(quantidade.getText().toString());
-        //Get values
-
-        pro.setFoto(getImagem());
-        pro.setNome(nome);
-        pro.setQuantidade(quant);
-        //Valida status
-        pro.setStatus(status.getSelectedItem().toString().equals("Comprado") ? "C" : "N");
-
-        databaseHelper.update(pro);
-        finish();
+//        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+//        String nome = nomeprod.getText().toString();
+//        int quant = Integer.parseInt(quantidade.getText().toString());
+//        //Get values
+//
+//        pro.setFoto(getImagem());
+//        pro.setNome(nome);
+//        pro.setQuantidade(quant);
+//        //Valida status
+//        pro.setStatus(status.getSelectedItem().toString().equals("Comprado") ? "C" : "N");
+//
+//        databaseHelper.update(pro);
+//        finish();
     }
 
     public void excluirCadastro(View v) {
-        DatabaseHelper databaseHelper = new DatabaseHelper(this);
-        databaseHelper.removerProduto(pro);
-        finish();
+//        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+//        databaseHelper.removerProduto(pro);
+//        finish();
     }
 
     //function salve
@@ -144,9 +156,8 @@ public class ProdutoActivity extends AppCompatActivity {
         //Valida status
         pro.setStatus(status.getSelectedItem().toString().equals("Comprado") ? "C" : "N");
 
-        DatabaseHelper databaseHelper = new DatabaseHelper(this);
-        databaseHelper.salvarProduto(pro);
-        finish();
+        new CadastrarProduto().execute(pro);
+//        finish();
     }
 
     //getImagem
@@ -208,5 +219,82 @@ public class ProdutoActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    //Salvar no banco
+    private class CadastrarProduto extends AsyncTask<Produto, Void, List<Produto>> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress = new ProgressDialog(ProdutoActivity.this);
+            progress.show();
+            progress.setCancelable(false);
+            progress.setContentView(R.layout.progres);
+        }
+
+        @Override
+        protected List<Produto> doInBackground(Produto... produtos) {
+            try {
+                URL url = new URL(Request.URL_REQUEST + "/ferramentas/salvarProduto");
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("Accept", "application/json");
+                urlConnection.setRequestProperty("codigo", "1");
+                urlConnection.setDoOutput(true);
+                urlConnection.setDoInput(true);
+
+                Gson gson = new Gson();
+                DataOutputStream outputStream = new DataOutputStream(urlConnection.getOutputStream());
+                String parametro = gson.toJson(produtos[0]);
+                Log.e("request", parametro);
+                outputStream.writeBytes(parametro);
+                outputStream.flush();
+                outputStream.close();
+
+                int codigoResposta = urlConnection.getResponseCode();
+
+                Log.e("request", "código " + codigoResposta);
+
+                if (codigoResposta == 200) {
+                    String jsonResposta = "";
+                    InputStreamReader inputStream = new InputStreamReader(urlConnection.getInputStream());
+                    BufferedReader reader = new BufferedReader(inputStream);
+                    String line = "";
+                    while ((line = reader.readLine()) != null) {
+                        jsonResposta += line;
+                    }
+                    Log.e("request", jsonResposta);
+
+                    Type listType = new TypeToken<ArrayList<Produto>>(){}.getType();
+                    return gson.fromJson(jsonResposta, listType);
+
+                } else {
+                    return null;
+                }
+
+            } catch (Exception e) {
+                Log.e("request", "Erro");
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(List<Produto> produtos) {
+            progress.dismiss();
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(ProdutoActivity.this);
+
+            if (produtos != null) {
+                alertDialog.setTitle("Atenção");
+                alertDialog.setMessage("Salvar produto com successo");
+                alertDialog.create().show();
+                finish();
+            } else {
+                alertDialog.setTitle("Atenção");
+                alertDialog.setMessage("Falha ao salvar");
+                alertDialog.create().show();
+            }
+            alertDialog.create().show();
+        }
     }
 }

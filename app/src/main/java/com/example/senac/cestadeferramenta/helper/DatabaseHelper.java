@@ -37,11 +37,11 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Produto.class);
             TableUtils.createTable(connectionSource, Phone.class);
 
-            //Usuario
-            Usuario usuario = new Usuario();
-            usuario.setLogin("chih.yang@aluno.sc.senac.br");
-            usuario.setSenha("123456");
-            getUsuarioDao().create(usuario);
+//            //Usuario
+//            Usuario usuario = new Usuario();
+//            usuario.setLogin("chih.yang@aluno.sc.senac.br");
+//            usuario.setSenha("123456");
+//            getUsuarioDao().create(usuario);
 
         } catch (Exception e) {
             Log.e("banco", "Erro ao criar banco");
@@ -175,6 +175,15 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             getPhoneDao().update(phone);
         } catch (Exception e) {
             Log.e("banco", "Falha ao alterar produto");
+        }
+    }
+
+    //Salvar usuario
+    public void salvarUsuario(Usuario usuario) {
+        try {
+            getUsuarioDao().create(usuario);
+        } catch (Exception e) {
+            Log.e("Banco", "Falha ao salvar usuario");
         }
     }
 }

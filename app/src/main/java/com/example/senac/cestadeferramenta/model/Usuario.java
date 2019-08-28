@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @DatabaseTable
 public class Usuario implements Serializable {
-    @DatabaseField(generatedId = true)
+    @DatabaseField(id = true)
     private Integer codigo;
 
     @DatabaseField(canBeNull = false)
