@@ -29,6 +29,7 @@ import com.example.senac.cestadeferramenta.R;
 import com.example.senac.cestadeferramenta.constantes.Request;
 import com.example.senac.cestadeferramenta.helper.DatabaseHelper;
 import com.example.senac.cestadeferramenta.model.Produto;
+import com.example.senac.cestadeferramenta.model.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -49,6 +50,7 @@ public class ProdutoActivity extends AppCompatActivity {
     Button btnExcluir;
     Produto pro;
     ProgressDialog progress;
+    Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,7 @@ public class ProdutoActivity extends AppCompatActivity {
         //Get id update
         Intent i = getIntent();
         pro = (Produto) i.getSerializableExtra("produto");
+        usuario = (Usuario) i.getSerializableExtra("usuario");
 
         if (pro != null) {
             //Oculta informações na tela
@@ -138,11 +141,11 @@ public class ProdutoActivity extends AppCompatActivity {
 //        finish();
     }
 
-    public void excluirCadastro(View v) {
+//    public void excluirCadastro(View v) {
 //        DatabaseHelper databaseHelper = new DatabaseHelper(this);
 //        databaseHelper.removerProduto(pro);
 //        finish();
-    }
+//    }
 
     //function salve
     public void salvar() {
@@ -157,7 +160,6 @@ public class ProdutoActivity extends AppCompatActivity {
         pro.setStatus(status.getSelectedItem().toString().equals("Comprado") ? "C" : "N");
 
         new CadastrarProduto().execute(pro);
-//        finish();
     }
 
     //getImagem
@@ -221,6 +223,7 @@ public class ProdutoActivity extends AppCompatActivity {
         return true;
     }
 
+
     //Salvar no banco
     private class CadastrarProduto extends AsyncTask<Produto, Void, List<Produto>> {
         @Override
@@ -240,7 +243,7 @@ public class ProdutoActivity extends AppCompatActivity {
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setRequestProperty("Content-Type", "application/json");
                 urlConnection.setRequestProperty("Accept", "application/json");
-                urlConnection.setRequestProperty("codigo", "1");
+                urlConnection.setRequestProperty("codigo", usuario.getCodigo().toString());
                 urlConnection.setDoOutput(true);
                 urlConnection.setDoInput(true);
 
@@ -266,7 +269,8 @@ public class ProdutoActivity extends AppCompatActivity {
                     }
                     Log.e("request", jsonResposta);
 
-                    Type listType = new TypeToken<ArrayList<Produto>>(){}.getType();
+                    Type listType = new TypeToken<ArrayList<Produto>>() {
+                    }.getType();
                     return gson.fromJson(jsonResposta, listType);
 
                 } else {
@@ -283,7 +287,6 @@ public class ProdutoActivity extends AppCompatActivity {
         protected void onPostExecute(List<Produto> produtos) {
             progress.dismiss();
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(ProdutoActivity.this);
-
             if (produtos != null) {
                 alertDialog.setTitle("Atenção");
                 alertDialog.setMessage("Salvar produto com successo");
@@ -294,7 +297,6 @@ public class ProdutoActivity extends AppCompatActivity {
                 alertDialog.setMessage("Falha ao salvar");
                 alertDialog.create().show();
             }
-            alertDialog.create().show();
         }
     }
 }

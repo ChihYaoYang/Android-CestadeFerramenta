@@ -10,6 +10,7 @@ import com.example.senac.cestadeferramenta.constantes.Request;
 import com.example.senac.cestadeferramenta.helper.AdapterList;
 import com.example.senac.cestadeferramenta.helper.DatabaseHelper;
 import com.example.senac.cestadeferramenta.model.Produto;
+import com.example.senac.cestadeferramenta.model.Usuario;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -37,13 +38,19 @@ public class Listagem extends AppCompatActivity {
     List<Produto> produtos;
     DatabaseHelper databaseHelper;
     ProgressDialog progress;
+    Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listagem);
 
+        Intent i = getIntent();
+        usuario = (Usuario) i.getSerializableExtra("usuario");
+
+
         final Intent intent = new Intent(this, ProdutoActivity.class);
+        intent.putExtra("usuario",usuario);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +71,7 @@ public class Listagem extends AppCompatActivity {
         listaProdutos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 intent.putExtra("produto", produtos.get(i));
+
                 startActivity(intent);
                 Toast.makeText(Listagem.this, "Nome: " + produtos.get(i), Toast.LENGTH_SHORT);
             }
@@ -102,7 +110,7 @@ public class Listagem extends AppCompatActivity {
                 urlConnection.setRequestMethod("GET");
                 urlConnection.setRequestProperty("Content-Type", "application/json");
                 urlConnection.setRequestProperty("Accept", "application/json");
-                urlConnection.setRequestProperty("codigo", "1");
+                urlConnection.setRequestProperty("codigo", usuario.getCodigo().toString());
 
                 Gson gson = new Gson();
 
@@ -137,9 +145,10 @@ public class Listagem extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Produto> produtos) {
             progress.dismiss();
-
-            AdapterList adapterList = (AdapterList) listaProdutos.getAdapter();
-            adapterList.atualizarProdutos(produtos);
+            if (produtos != null) {
+                AdapterList adapterList = (AdapterList) listaProdutos.getAdapter();
+                adapterList.atualizarProdutos(produtos);
+            }
         }
     }
 }

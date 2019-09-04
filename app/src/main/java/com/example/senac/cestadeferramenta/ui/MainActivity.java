@@ -138,7 +138,13 @@ public class MainActivity extends AppCompatActivity {
                 alertDialog.setMessage(usuario.getNome());
                 alertDialog.create().show();
 
-                startActivity(new Intent(MainActivity.this, Principal.class));
+                Intent intent = new Intent(MainActivity.this, Principal.class);
+                intent.putExtra("usuario", usuario);
+                startActivity(intent);
+
+//                startActivity(new Intent(MainActivity.this, Principal.class));
+//                getIntent().putExtra("Usuario", usuario);
+
                 finish();
             } else {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);

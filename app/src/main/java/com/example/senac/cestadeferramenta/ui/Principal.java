@@ -10,14 +10,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.senac.cestadeferramenta.JogoDaVelhaActivity;
 import com.example.senac.cestadeferramenta.R;
+import com.example.senac.cestadeferramenta.model.Produto;
+import com.example.senac.cestadeferramenta.model.Usuario;
 
 public class Principal extends AppCompatActivity {
+    Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_principal);
+
+        //pega item do outro pagina
+        Intent i = getIntent();
+        usuario = (Usuario) i.getSerializableExtra("usuario");
     }
 
     //Menu
@@ -49,6 +56,7 @@ public class Principal extends AppCompatActivity {
 
     public void irParalistagem(View V) {
         Intent i = new Intent(this, Listagem.class);
+        i.putExtra("usuario", usuario);
         startActivity(i);
     }
 
